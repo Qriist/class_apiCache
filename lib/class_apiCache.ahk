@@ -21,11 +21,12 @@ class class_ApiCache{
 		this.initDir(pathToDir)
 		this.initDB(pathToDB)
 	}
-	initDir(pathToDir){	;don't need anymore?
+	initDir(pathToDir){	;temporary directory for bulk downloads
 		FileCreateDir, % pathToDir
 		this.acDir := Trim(pathToDir,"\")
 	}
 	initDB(pathToDB,journal_mode := "wal",synchronous := 0){	
+		this.initDLLs()
 		If FileExist(pathToDB){
 			this.acDB := new SQLiteDB
 			if !this.acDB.openDB(pathToDB)
@@ -50,6 +51,25 @@ class class_ApiCache{
 		;this.acDB.getTable("PRAGMA synchronous;",table)
 		;msgbox % st_printArr(table)
 		;this.acDB.exec("VACUUM;")
+	}
+	initDLLs(){
+		;this follows the expectations of class_SQLiteDB when checking for SQLite3.dll + unicode dependencies
+		/*	returns the id of the sqlite dll in use - used to check if our supplied version is present (AKA best case scenario)
+
+			SELECT sqlite_source_id();
+
+			current id: 2022-05-06 15:25:27 78d9c993d404cdfaa7fdd2973fa1052e3da9f66215cff9c5540ebe55c407d9fe
+		*/
+
+
+		/*	returns "4" if all functions are present
+			SELECT SUM(1) 
+			FROM pragma_function_list
+			WHERE name = 'sqlar_compress' OR 
+				name = 'sqlar_uncompress' OR 
+				name = 'compress' OR 
+				name = 'uncompress';
+		*/
 	}
 	initSchema(){
 		retObj := []

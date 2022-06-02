@@ -1,7 +1,7 @@
 #Include <SingleRecordSQL>
 #Include <functions>
 #Include <LibCrypt>
-#Include <class_SQLiteDB>
+#Include <class_SQLiteDB_modified>
 #Include <WinHttpRequest>
 #Include <string_things>
 #Include <class_apiCache>
