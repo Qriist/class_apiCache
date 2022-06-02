@@ -15,5 +15,5 @@ apiCache := new class_apiCache
 apiCache.init(A_ScriptDir "\cache",A_ScriptDir "\winApi.db")
 
 ;msgbox % apiCache.lastResponseHeaders
-foundRecords := apiCache.findRecords(,"adhoc",,,1)
+foundRecords := apiCache.findRecords("adhoc",,,,1)
 msgbox % foundRecords.Count() ;"`n`n" st_printarr(foundRecords)
