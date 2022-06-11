@@ -1,3 +1,7 @@
+;NOTE: not really full of examples at the moment.
+;   Pretty much just used this for scratch while writing the class.
+;   Will update with with actual useful examples ~soon~.
+
 #Include <SingleRecordSQL>
 #Include <functions>
 #Include <LibCrypt>
