@@ -12,10 +12,18 @@ SetBatchLines, -1
 
 start := A_TickCount
 apiCache := new class_apiCache
-apiCache.init(A_ScriptDir "\cache",A_ScriptDir "\winApi.db")
+apiCache.init(A_ScriptDir "\cache",A_ScriptDir "\empty.db")
+loop,files, % A_ScriptDir "\temp\*.html" 
+{
+    SplitPath(A_LoopFileLongPath,FileName,FileDir,FileExt,FileBase)
+    if !InStr(FileBase,"-h")
+    apiCache.sideloadFingerprint(A_LoopFileLongPath,A_LoopFileLongPath,,,FileDir "\" FileBase "-h.html",1)
+}
+;apiCache.init(A_ScriptDir "\cache",A_ScriptDir "\winApi.db")
 ;apiCache.init(A_ScriptDir "\cache",A_ScriptDir "\uncompressed.db")
 ;apiCache.exportUncompressedDb(A_ScriptDir "\uncompressed.db",0)
 ;msgbox % apiCache.lastResponseHeaders
+ExitApp
 foundRecords := apiCache.findFingerprints("disk",,,,1)
 stop1 := (A_TickCount - start) / 1000 
 
