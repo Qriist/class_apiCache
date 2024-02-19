@@ -1,3 +1,5 @@
 *.db*
 
 temp
+class_apiCache.code-workspace
+blobtest.gzip
